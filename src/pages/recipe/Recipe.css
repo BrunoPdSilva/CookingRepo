@@ -1,20 +1,26 @@
 .recipe {
   max-width: 1200px;
   margin: 40px auto;
-  text-align: center;
-  background: #fff;
   padding: 40px;
+
+  text-align: center;
+  
+  background: #fff;
   box-sizing: border-box;
 }
-.recipe ul {
-  display: flex;
-  padding: 0;
-  justify-content: center;
-  margin-top: 0;
+
+.recipe .page-title {
+  margin: 8px;
 }
+
 .recipe li {
-  list-style-type: none;
   margin-right: 10px;
+
+  font-size: 20px;
+
+  display: inline;
+  
+  list-style-type: none;
   color: #777;
 }
 .recipe li::after {
@@ -24,11 +30,20 @@
   content: ".";
 }
 .method {
-  text-align: left;
   line-height: 1.5em;
+  
+  text-align: left;
 }
 
 .recipe.dark {
-  background: #555;
   color: #e4e4e4;
+  background: #555;
+}
+
+.recipe.dark h2 {
+  color: #e4e4e4;
+}
+
+.recipe.dark li {
+  color: white;
 }

@@ -16,7 +16,7 @@ export function Searchbar() {
   return (
     <div className="searchbar">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="search">Search:</label>
+        <label htmlFor="search">Procurar:</label>
         <input type="text" id="search" onChange={e => setTerm(e.target.value)} required />
       </form>
     </div>

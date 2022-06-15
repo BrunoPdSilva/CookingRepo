@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import { useFetch } from '../../hooks/useFetch';
+import { projectFirestore } from '../../firebase/config';
 
 import './Create.css';
 
@@ -11,18 +11,16 @@ export function Create() {
   const [newIngredient, setNewIngredient] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const ingredientInput = useRef(null)
-  const { postData, data, error } = useFetch('http://localhost:3000/recipes', "POST")
   const history = useHistory();
 
-  useEffect(() => {
-    if (data) {
-      history.push("/");
-    }
-  }, [data])
-
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
+    const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+
+    try {
+      await projectFirestore.collection('recipes').add(doc);
+      history.push("/");
+    } catch (err) { console.log(err) }
   }
 
   const handleAdd = e => {
@@ -38,17 +36,17 @@ export function Create() {
 
   return (
     <div className="create">
-      <h1 className="page-title">Add a new recipe</h1>
+      <h1 className="page-title">Adicione uma nova receita</h1>
 
       <form onSubmit={handleSubmit}>
 
         <label>
-          <span>Recipe title:</span>
+          <span>Nome da Receita:</span>
           <input type="text" onChange={e => setTitle(e.target.value)} value={title} required />
         </label>
 
         <label>
-          <span>Recipe Ingredients:</span>
+          <span>Ingredientes:</span>
           <div className="ingredients">
             <input
               type="text"
@@ -56,18 +54,18 @@ export function Create() {
               value={newIngredient}
               ref={ingredientInput}
             />
-            <button className="btn" onClick={e => handleAdd(e)} >Add</button>
+            <button className="btn" onClick={e => handleAdd(e)} >Adicionar</button>
           </div>
         </label>
-        <p>Ingredients: {ingredients.map(i => (<em key={i}>{i}, </em>))}</p>
+        <p>{ingredients.map(i => (<em key={i}>{i}, </em>))}</p>
 
         <label>
-          <span>Recipe method:</span>
+          <span>Modo de preparo:</span>
           <textarea onChange={e => setMethod(e.target.value)} value={method} required />
         </label>
 
         <label>
-          <span>Cooking time:</span>
+          <span>Tempo de preparo:</span>
           <input type="number" onChange={e => setCookingTime(e.target.value)} value={cookingTime} required />
         </label>
 

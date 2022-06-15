@@ -15,7 +15,6 @@
   position: relative;
 }
 .recipe-list .card:hover {
-  transform: rotate(3deg);
 }
 .recipe-list .card h3 {
   color: #555;
@@ -43,6 +42,20 @@
   padding: 8px;
   border-radius: 4px;
   margin: 20px auto 0;
+  transition: 0.2s;
+}
+
+.recipe-list .card a:hover {
+  filter: brightness(0.9);
+}
+
+.delete {
+  height: 30px;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  cursor: pointer;
+  filter: invert(60%);
 }
 
 /* dark mode */
