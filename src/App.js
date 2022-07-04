@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/home/Home'
@@ -20,25 +20,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <ThemeSelector />
-        <Switch>
+        <Routes>
 
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes/:id" element={<Recipe />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/search" element={<Search />} />
 
-          <Route path="/recipes/:id">
-            <Recipe />
-          </Route>
-
-          <Route path="/create">
-            <Create />
-          </Route>
-
-          <Route path="/search">
-            <Search />
-          </Route>
-
-        </Switch>
+        </Routes>
       </BrowserRouter>
 
     </div>

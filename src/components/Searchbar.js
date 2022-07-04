@@ -1,24 +1,29 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import './Searchbar.css';
+import "./Searchbar.css";
 
 export function Searchbar() {
-  const [term, setTerm] = useState('')
-  const history = useHistory()
+  const [term, setTerm] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    history.push(`/search?q=${term}`)
-  }
+    navigate(`/search?q=${term}`);
+  };
 
   return (
     <div className="searchbar">
       <form onSubmit={handleSubmit}>
         <label htmlFor="search">Procurar:</label>
-        <input type="text" id="search" onChange={e => setTerm(e.target.value)} required />
+        <input
+          type="text"
+          id="search"
+          onChange={e => setTerm(e.target.value)}
+          required
+        />
       </form>
     </div>
-  )
+  );
 }
